@@ -8,11 +8,6 @@ connect();
 
 export async function POST(request: NextRequest){
     try{
-
-        if(emailType === "VERIFY"){
-            await User.findOneAndUpdate(userID, {verified: true});
-        }
-
         const reqBody = await request.json();
         const {username, email, password} = reqBody;
         console.log(reqBody);
@@ -33,6 +28,7 @@ export async function POST(request: NextRequest){
         })
 
         const saveUser = await newUser.save();
+        console.log(saveUser)
 
         //send verification email
         await sendMail({email, emailType: "VERIFY", userId: saveUser._id});
