@@ -38,9 +38,7 @@ export async function POST(request: NextRequest){
             success: true,
             saveUser
         })
-
-
-        
+                
         //validation
 
     }catch(err:any){

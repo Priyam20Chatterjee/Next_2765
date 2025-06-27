@@ -8,7 +8,7 @@ export const sendMail = async({email, emailType, userId}: any) => {
         //TODO: Configure mail for usage.
         const hashedToken = await bycryptjs.hash(userId.toString(), 10);
         if(emailType === "VERIFY"){
-          await User.findByIdAndUpdate(userId, {verified: true, verifyTokenExpiery: Date.now()+3600000});
+          await User.findByIdAndUpdate(userId, {$set : {verified: true, verifyTokenExpiery: Date.now()+3600000}});  //expiry 1hr from now
         } else if(emailType === "RESET"){
           await User.findByIdAndUpdate(userId, {forgetPasswordToken: hashedToken, forgetPasswordTokenExpiry: Date.now()+3600000});
         }
